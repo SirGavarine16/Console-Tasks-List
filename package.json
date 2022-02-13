@@ -1,0 +1,11 @@
+{
+  "name": "02-console-tasklist",
+  "version": "1.0.0",
+  "description": "A console application that manages a task list on a .json file.",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index.js"
+  },
+  "author": "ilyAkagi",
+  "license": "ISC"
+}
