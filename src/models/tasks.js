@@ -18,6 +18,17 @@ class Tasks {
         return Object.keys(this.tasklist).map((key) => this.tasklist[key])
     }
 
+    showAllTasks = () => {
+        const tasklist = this.getTasklistArray()
+        console.log('\n')
+        tasklist.forEach((task, index) => {
+            const { description, completedAt } = task
+            const taskState = completedAt ? `Completed`.green : `Pending`.red
+            console.log(`${`[${index+1}]`.green} ${description} :: ${taskState}`)
+        })
+        console.log('\n')
+    }
+
     /**
      * @param {Task[]} array 
      */

@@ -18,7 +18,7 @@ const main = async () => {
 
         switch (optionSelected) {
             case '1':
-                console.log(myTasks.getTasklistArray())
+                myTasks.showAllTasks()
                 await pauseConsole()
                 break
             case '4':
