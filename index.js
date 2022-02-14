@@ -1,5 +1,5 @@
 const { saveDataOnDB, readDataOnDB } = require('./src/helpers/file')
-const { getOptionFromInquirerMenu, pauseConsole, readInput, getConfirmation, getTaskIDToDelete } = require('./src/helpers/inquirer')
+const { getOptionFromInquirerMenu, pauseConsole, readInput, getConfirmation, getTaskIDToDelete, getTaskIDsToEdit } = require('./src/helpers/inquirer')
 const Tasks = require('./src/models/tasks')
 
 const main = async () => {
@@ -30,6 +30,12 @@ const main = async () => {
                 myTasks.createTask(description)
                 await pauseConsole()
                 await saveDataOnDB(myTasks.getTasklistArray())
+                break
+            case '5':
+                const taskIDs = await getTaskIDsToEdit(myTasks.getTasklistArray())
+                myTasks.toggleTasks(taskIDs)
+                await saveDataOnDB(myTasks.getTasklistArray())
+                await pauseConsole()
                 break
             case '6':
                 const taskID = await getTaskIDToDelete(myTasks.getTasklistArray())

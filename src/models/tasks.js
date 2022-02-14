@@ -1,4 +1,7 @@
+const moment = require('moment')
+
 const Task = require("./task")
+
 
 class Tasks {
 
@@ -19,6 +22,18 @@ class Tasks {
      */
     deleteTask = (taskID) => {
         delete this.tasklist[taskID]
+    }
+
+    toggleTasks = (tasksCompleted = []) => {
+        const tasklist = this.getTasklistArray()
+        tasklist.forEach((task) => {
+            const taskRef = this.tasklist[task.id]
+            if (tasksCompleted.includes(task.id)){
+                taskRef.completedAt = moment().format('LLL')
+            } else {
+                taskRef.completedAt = null
+            }
+        })
     }
 
     /**

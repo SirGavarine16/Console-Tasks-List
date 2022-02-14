@@ -104,11 +104,29 @@ const getTaskIDToDelete = async (tasklist) => {
     return value
 }
 
+const getTaskIDsToEdit = async (tasklist) => {
+    const questions = [{
+        type: 'checkbox',
+        name: 'taskIDArray',
+        message: 'Select tasks',
+        choices: tasklist.map((task, index) => {
+            return {
+                value: task.id,
+                name: `${`[${index + 1}]`.green} ${task.description}`,
+                checked: task.completedAt !== null
+            }
+        })
+    }]
+    const { taskIDArray } = await inquirer.prompt(questions)
+    return taskIDArray
+}
+
 
 module.exports = {
     getOptionFromInquirerMenu,
     pauseConsole,
     readInput,
     getTaskIDToDelete,
-    getConfirmation
+    getConfirmation,
+    getTaskIDsToEdit
 }
