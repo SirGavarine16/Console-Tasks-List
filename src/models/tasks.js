@@ -45,13 +45,11 @@ class Tasks {
 
     showAllTasks = () => {
         const tasklist = this.getTasklistArray()
-        console.log('\n')
         tasklist.forEach((task, index) => {
             const { description, completedAt } = task
             const taskState = completedAt ? `Completed`.green : `Pending`.red
             console.log(`${`[${index + 1}]`.green} ${description} :: ${taskState}`)
         })
-        console.log('\n')
     }
 
     /**
@@ -61,13 +59,11 @@ class Tasks {
         const tasklist = completed ?
             this.getTasklistArray().filter((t) => t.completedAt !== null) :
             this.getTasklistArray().filter((t) => t.completedAt === null)
-        console.log('\n')
         tasklist.forEach((task, index) => {
             const { description, completedAt } = task
             const taskState = completedAt ? `${completedAt}`.white : `Pending`.red
             console.log(`${`[${index + 1}]`.green} ${description} :: ${taskState}`)
         })
-        console.log('\n')
     }
 
     /**

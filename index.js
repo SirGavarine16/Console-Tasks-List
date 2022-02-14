@@ -52,6 +52,7 @@ const main = async () => {
         }
 
         if (optionSelected !== '0') {
+            console.log('\n')
             await pauseConsole()
         }
 
