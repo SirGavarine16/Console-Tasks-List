@@ -6,10 +6,10 @@ class Task {
     /**
      * @param {string} description 
      */
-    constructor(description) {
-        this.id = uuidv4()
+    constructor(description, id = uuidv4(), completedAt = null) {
+        this.id = id 
         this.description = description
-        this.completedAt = null
+        this.completedAt = completedAt 
     }
 
 }

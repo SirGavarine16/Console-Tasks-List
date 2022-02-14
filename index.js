@@ -1,26 +1,31 @@
+require('colors')
+
+const { saveDataOnDB, readDataOnDB } = require('./src/helpers/file')
 const { getOptionFromInquirerMenu, pauseConsole, readInput } = require('./src/helpers/inquirer')
 const Tasks = require('./src/models/tasks')
 
-require('colors')
 
 
 const main = async () => {
 
     let optionSelected = ''
-    const myTasks = new Tasks()
+
+    const data = await readDataOnDB()
+    const myTasks = new Tasks(data)
 
     do {
         optionSelected = await getOptionFromInquirerMenu()
 
         switch (optionSelected) {
             case '1':
-                console.log(myTasks.tasklist)
+                console.log(myTasks.getTasklistArray())
                 await pauseConsole()
                 break
             case '4':
                 const description = await readInput('Description: ', 'Please add a description...')
                 myTasks.createTask(description)
                 await pauseConsole()
+                await saveDataOnDB(myTasks.getTasklistArray())
                 break
         }
 
