@@ -28,8 +28,10 @@ class Tasks {
         const tasklist = this.getTasklistArray()
         tasklist.forEach((task) => {
             const taskRef = this.tasklist[task.id]
-            if (tasksCompleted.includes(task.id)){
-                taskRef.completedAt = moment().format('LLL')
+            if (tasksCompleted.includes(task.id)) {
+                if (taskRef.completedAt === null) {
+                    taskRef.completedAt = moment().format('LLL')
+                }
             } else {
                 taskRef.completedAt = null
             }
