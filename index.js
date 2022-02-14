@@ -1,10 +1,6 @@
-require('colors')
-
 const { saveDataOnDB, readDataOnDB } = require('./src/helpers/file')
-const { getOptionFromInquirerMenu, pauseConsole, readInput } = require('./src/helpers/inquirer')
+const { getOptionFromInquirerMenu, pauseConsole, readInput, getConfirmation, getTaskIDToDelete } = require('./src/helpers/inquirer')
 const Tasks = require('./src/models/tasks')
-
-
 
 const main = async () => {
 
@@ -34,6 +30,17 @@ const main = async () => {
                 myTasks.createTask(description)
                 await pauseConsole()
                 await saveDataOnDB(myTasks.getTasklistArray())
+                break
+            case '6':
+                const taskID = await getTaskIDToDelete(myTasks.getTasklistArray())
+                if (taskID !== '0') {
+                    const confirm = await getConfirmation('Are you sure?')
+                    if (confirm) {
+                        myTasks.deleteTask(taskID)
+                        await saveDataOnDB(myTasks.getTasklistArray())
+                    }
+                }
+                await pauseConsole()
                 break
         }
 

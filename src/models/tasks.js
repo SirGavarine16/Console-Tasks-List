@@ -15,6 +15,13 @@ class Tasks {
     }
 
     /**
+     * @param {string} taskID 
+     */
+    deleteTask = (taskID) => {
+        delete this.tasklist[taskID]
+    }
+
+    /**
      * @returns {Task[]}
      */
     getTasklistArray = () => {
