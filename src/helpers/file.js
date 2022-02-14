@@ -31,7 +31,6 @@ const readDataOnDB = () => {
     })
 }
 
-
 module.exports = {
     saveDataOnDB,
     readDataOnDB

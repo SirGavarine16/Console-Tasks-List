@@ -11,22 +11,22 @@ const getMainMenuQuestions = () => {
         name: 'value',
         message: 'What do you wish to do?',
         choices: [{
-            value: '1',
-            name: `${'[1]'.green} Show all tasks.`,
+            value: 'createTask',
+            name: `${'[1]'.green} Create a new task.`,
         }, {
-            value: '2',
-            name: `${'[2]'.green} Show all pending tasks.`,
+            value: 'showAllTasks',
+            name: `${'[2]'.green} Show all tasks.`,
         }, {
-            value: '3',
-            name: `${'[3]'.green} Show all completed tasks.`,
+            value: 'showPendingTasks',
+            name: `${'[3]'.green} Show all pending tasks.`,
         }, {
-            value: '4',
-            name: `${'[4]'.green} Create a new task.`,
+            value: 'showCompletedTasks',
+            name: `${'[4]'.green} Show all completed tasks.`,
         }, {
-            value: '5',
+            value: 'completeTask',
             name: `${'[5]'.green} Complete a task.`,
         }, {
-            value: '6',
+            value: 'deleteTask',
             name: `${'[6]'.green} Delete a task.`,
         }, {
             value: '0',

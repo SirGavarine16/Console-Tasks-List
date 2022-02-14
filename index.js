@@ -1,5 +1,12 @@
 const { saveDataOnDB, readDataOnDB } = require('./src/helpers/file')
-const { getOptionFromInquirerMenu, pauseConsole, readInput, getConfirmation, getTaskIDToDelete, getTaskIDsToEdit } = require('./src/helpers/inquirer')
+const { 
+    getOptionFromMainMenu,
+    pauseConsole, 
+    readInput, 
+    getConfirmation, 
+    getTaskIDToDelete, 
+    getTaskIDsToEdit,  
+} = require('./src/helpers/inquirer')
 const Tasks = require('./src/models/tasks')
 
 const main = async () => {
@@ -10,34 +17,29 @@ const main = async () => {
     const myTasks = new Tasks(data)
 
     do {
-        optionSelected = await getOptionFromInquirerMenu()
+        optionSelected = await getOptionFromMainMenu()
 
         switch (optionSelected) {
-            case '1':
+            case 'showAllTasks':
                 myTasks.showAllTasks()
-                await pauseConsole()
                 break
-            case '2':
+            case 'showPendingTasks':
                 myTasks.showTasksFiltered(false)
-                await pauseConsole()
                 break
-            case '3':
+            case 'showCompletedTasks':
                 myTasks.showTasksFiltered()
-                await pauseConsole()
                 break
-            case '4':
+            case 'createTask':
                 const description = await readInput('Description: ', 'Please add a description...')
                 myTasks.createTask(description)
-                await pauseConsole()
                 await saveDataOnDB(myTasks.getTasklistArray())
                 break
-            case '5':
+            case 'completeTask':
                 const taskIDs = await getTaskIDsToEdit(myTasks.getTasklistArray())
                 myTasks.toggleTasks(taskIDs)
                 await saveDataOnDB(myTasks.getTasklistArray())
-                await pauseConsole()
                 break
-            case '6':
+            case 'deleteTask':
                 const taskID = await getTaskIDToDelete(myTasks.getTasklistArray())
                 if (taskID !== '0') {
                     const confirm = await getConfirmation('Are you sure?')
@@ -46,8 +48,11 @@ const main = async () => {
                         await saveDataOnDB(myTasks.getTasklistArray())
                     }
                 }
-                await pauseConsole()
                 break
+        }
+
+        if (optionSelected !== '0') {
+            await pauseConsole()
         }
 
     } while (optionSelected !== '0')
