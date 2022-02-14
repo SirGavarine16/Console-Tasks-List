@@ -1,6 +1,6 @@
-const Task = require('../models/task')
-
 require('colors')
+
+const Task = require('../models/task')
 
 /**
  * @returns Inquirer questions with the options of the main menu.
