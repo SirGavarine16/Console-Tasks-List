@@ -1,4 +1,5 @@
-const { getOptionFromInquirerMenu, pauseConsole } = require('./src/helpers/inquirer')
+const { getOptionFromInquirerMenu, pauseConsole, readInput } = require('./src/helpers/inquirer')
+const Tasks = require('./src/models/tasks')
 
 require('colors')
 
@@ -6,13 +7,23 @@ require('colors')
 const main = async () => {
 
     let optionSelected = ''
+    const myTasks = new Tasks()
 
     do {
         optionSelected = await getOptionFromInquirerMenu()
-        if (optionSelected !== '0') {
-            console.log(`\nOption selected is: ${optionSelected}.\n`)
-            await pauseConsole()
+
+        switch (optionSelected) {
+            case '1':
+                console.log(myTasks.tasklist)
+                await pauseConsole()
+                break
+            case '4':
+                const description = await readInput('Description: ', 'Please add a description...')
+                myTasks.createTask(description)
+                await pauseConsole()
+                break
         }
+
     } while (optionSelected !== '0')
 
 }
