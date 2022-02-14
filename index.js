@@ -1,7 +1,6 @@
+const { getOptionFromInquirerMenu, pauseConsole } = require('./src/helpers/inquirer')
+
 require('colors')
-
-const { getOptionFromMenu, pauseConsole } = require('./src/helpers/console')
-
 
 
 const main = async () => {
@@ -9,9 +8,9 @@ const main = async () => {
     let optionSelected = ''
 
     do {
-        optionSelected = await getOptionFromMenu()
-        console.log(`\nOption selected is: ${optionSelected}.\n`)
+        optionSelected = await getOptionFromInquirerMenu()
         if (optionSelected !== '0') {
+            console.log(`\nOption selected is: ${optionSelected}.\n`)
             await pauseConsole()
         }
     } while (optionSelected !== '0')
