@@ -2,15 +2,17 @@ const moment = require('moment')
 
 const Task = require("./task")
 
-
 class Tasks {
 
+    /**
+     * @param {Task[]} tasklistArray Array extracted from the data.json file. 
+     */
     constructor(tasklistArray = null) {
         this.tasklist = tasklistArray ? this.parseTasklistArray(tasklistArray) : {}
     }
 
     /**
-     * @param {string} description 
+     * @param {string} description Description of the task.
      */
     createTask = (description) => {
         const newTask = new Task(description)
@@ -18,12 +20,8 @@ class Tasks {
     }
 
     /**
-     * @param {string} taskID 
+     * @param {string[]} tasksCompleted Array of IDs of completed tasks.
      */
-    deleteTask = (taskID) => {
-        delete this.tasklist[taskID]
-    }
-
     toggleTasks = (tasksCompleted = []) => {
         const tasklist = this.getTasklistArray()
         tasklist.forEach((task) => {
@@ -39,10 +37,10 @@ class Tasks {
     }
 
     /**
-     * @returns {Task[]}
+     * @param {string} taskID ID of the task.
      */
-    getTasklistArray = () => {
-        return Object.keys(this.tasklist).map((key) => this.tasklist[key])
+    deleteTask = (taskID) => {
+        delete this.tasklist[taskID]
     }
 
     showAllTasks = () => {
@@ -56,6 +54,9 @@ class Tasks {
         console.log('\n')
     }
 
+    /**
+     * @param {boolean} completed Boolean to show completed tasks or not.
+     */
     showTasksFiltered = (completed = true) => {
         const tasklist = completed ?
             this.getTasklistArray().filter((t) => t.completedAt !== null) :
@@ -67,6 +68,13 @@ class Tasks {
             console.log(`${`[${index + 1}]`.green} ${description} :: ${taskState}`)
         })
         console.log('\n')
+    }
+
+    /**
+     * @returns {Task[]}
+     */
+    getTasklistArray = () => {
+        return Object.keys(this.tasklist).map((key) => this.tasklist[key])
     }
 
     /**
