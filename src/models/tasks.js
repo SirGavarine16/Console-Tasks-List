@@ -14,6 +14,9 @@ class Tasks {
         this.tasklist[newTask.id] = newTask
     }
 
+    /**
+     * @returns {Task[]}
+     */
     getTasklistArray = () => {
         return Object.keys(this.tasklist).map((key) => this.tasklist[key])
     }
@@ -24,7 +27,20 @@ class Tasks {
         tasklist.forEach((task, index) => {
             const { description, completedAt } = task
             const taskState = completedAt ? `Completed`.green : `Pending`.red
-            console.log(`${`[${index+1}]`.green} ${description} :: ${taskState}`)
+            console.log(`${`[${index + 1}]`.green} ${description} :: ${taskState}`)
+        })
+        console.log('\n')
+    }
+
+    showTasksFiltered = (completed = true) => {
+        const tasklist = completed ?
+            this.getTasklistArray().filter((t) => t.completedAt !== null) :
+            this.getTasklistArray().filter((t) => t.completedAt === null)
+        console.log('\n')
+        tasklist.forEach((task, index) => {
+            const { description, completedAt } = task
+            const taskState = completedAt ? `${completedAt}`.white : `Pending`.red
+            console.log(`${`[${index + 1}]`.green} ${description} :: ${taskState}`)
         })
         console.log('\n')
     }

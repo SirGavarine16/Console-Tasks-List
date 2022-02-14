@@ -21,6 +21,14 @@ const main = async () => {
                 myTasks.showAllTasks()
                 await pauseConsole()
                 break
+            case '2':
+                myTasks.showTasksFiltered(false)
+                await pauseConsole()
+                break
+            case '3':
+                myTasks.showTasksFiltered()
+                await pauseConsole()
+                break
             case '4':
                 const description = await readInput('Description: ', 'Please add a description...')
                 myTasks.createTask(description)
